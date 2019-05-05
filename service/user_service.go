@@ -4,6 +4,9 @@ import (
 	"project-builder/db"
 	"project-builder/mapper"
 	"fmt"
+	"project-builder/log"
+	"go.uber.org/zap"
+	"strconv"
 )
 
 func InsertUser(user *mapper.User) (int64, error) {
@@ -19,6 +22,6 @@ func QueryUserList() {
 		fmt.Printf("query err:%v", err)
 	}
 	for k, v := range resultMap {
-		fmt.Printf("k:%v, v:%v\n", k, v)
+		log.WebInfo.Info("user==", zap.String("key",strconv.Itoa(k)), zap.Any("val", v))
 	}
 }

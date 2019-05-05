@@ -6,8 +6,6 @@ import (
 	"net/http"
 	"project-builder/controller"
 	"path/filepath"
-	"os"
-	"fmt"
 )
 
 var Router *gin.Engine
@@ -55,11 +53,7 @@ func SetupRouter() *gin.Engine {
 
 	//模板
 	viewPath := util.Config.Section("router").Key("view.path").String()
-	pwd, pwdErr := os.Getwd();
-	if pwdErr != nil{
-		fmt.Println(pwdErr)
-	}
-	Router.LoadHTMLGlob(filepath.Join(pwd, viewPath))
+	Router.LoadHTMLGlob(filepath.Join(util.GetProPath(), viewPath))
 
 	//用户route
 	Router.GET("/user/list", controller.QueryUserList)

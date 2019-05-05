@@ -6,7 +6,6 @@ import (
 	"strconv"
 	"project-builder/mapper"
 	"project-builder/service"
-	"time"
 )
 
 func UserAdd(ctx *gin.Context) {
@@ -21,9 +20,7 @@ func UserAdd(ctx *gin.Context) {
 			return
 		}
 
-		now := time.Now()
-
-		user := mapper.User{Name: name, Age: ageTemp, CreateTime:now, UpdateTime:now}
+		user := mapper.User{Name: name}
 		_, insertErr := service.InsertUser(&user)
 		if insertErr != nil {
 			ctx.HTML(http.StatusInternalServerError, "user_add.html", gin.H{

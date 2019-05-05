@@ -6,7 +6,7 @@ import (
 	"github.com/go-xorm/xorm"
 	"project-builder/util"
 	"os"
-	"project-builder/entity"
+	"project-builder/mapper"
 )
 
 var (
@@ -29,7 +29,7 @@ func init() {
 		fmt.Printf("Fail to connect to db: %v", err)
 		os.Exit(1)
 	}
-	syncErr := dbEngine.Sync2(new(entity.User))
+	syncErr := dbEngine.Sync2(new(mapper.User))
 	if syncErr != nil{
 		fmt.Printf("sync err:%v\n", syncErr)
 	}
